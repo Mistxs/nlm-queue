@@ -42,6 +42,7 @@ def send_message(trigger_message):
     logging.info(f'start send_message({trigger_message})')
     try:
         response = client.conversations_history(channel=channel_id)
+        # print(response)
         messages = response.get("messages",'')
         if messages:
             logging.info(f'conversation history collect successfull')
@@ -53,8 +54,6 @@ def send_message(trigger_message):
                     client.chat_postMessage(channel=channel_id, thread_ts=parent_message_ts, text=hde_counter)
                     logging.info('message to slack send')
                     break
-                else:
-                    raise Exception("Invalid response from Slack API")
         else:
             logging.error(f'couldnt get slack history. response = {response}')
             raise Exception("Invalid response from Slack API")
