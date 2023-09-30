@@ -64,7 +64,10 @@ def send_message(trigger_message):
 
 
 current_hour = int(time.strftime("%H"))
+print(current_hour)
+input()
 if 8 <= current_hour < 20:
+
     send_message("Reminder: В 9:00 отправить количество открытых чатов в тред")
 else:
     send_message("Reminder: Ровно в 21:00 прислать в тред кол-во открытых чатов + дату изменения самого старого чата")
