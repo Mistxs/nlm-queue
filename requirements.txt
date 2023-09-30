@@ -1,0 +1,10 @@
+certifi==2023.7.22
+cffi==1.15.1
+charset-normalizer==3.3.0
+cryptography @ file:///private/tmp/python-cryptography-20230802-6609-hza959/cryptography-41.0.3
+idna==3.4
+protobuf==4.24.3
+pycparser @ file:///private/tmp/pycparser-20230831-6050-10bkury/pycparser-2.21
+requests==2.31.0
+slack-sdk==3.22.0
+urllib3==2.0.5
