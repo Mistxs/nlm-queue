@@ -11,9 +11,9 @@ slack_token = slack_token
 client = WebClient(token=slack_token)
 
 
-# channel_id = "CCPT7J0GN"  # nightline
+channel_id = "CCPT7J0GN"  # nightline
 # channel_id = "C05974NHZ96"  # innachannel
-channel_id = "C058PJHTDEH" # innatest
+# channel_id = "C058PJHTDEH" # innatest
 
 
 logging.basicConfig(filename='nlm.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -33,6 +33,7 @@ def collect_data():
 
 ---
 powered by crontab
+linux 4ever
 '''
 
     return message
