@@ -37,12 +37,19 @@ powered by crontab
 
     return message
 
+retry_counter = 0
 
-def send_message(trigger_message):
-    logging.info(f'start send_message({trigger_message})')
+def send_message():
+    global retry_counter
+    logging.info(f'start send_message')
+
+    current_hour = int(time.strftime("%H"))
+    if 0 <= current_hour < 15:
+        trigger_message = "Reminder: В 9:00 отправить количество открытых чатов в тред"
+    else:
+        trigger_message = "Reminder: Ровно в 21:00 прислать в тред кол-во открытых чатов + дату изменения самого старого чата"
     try:
         response = client.conversations_history(channel=channel_id)
-        # print(response)
         messages = response.get("messages",'')
         if messages:
             logging.info(f'conversation history collect successfull')
@@ -58,12 +65,8 @@ def send_message(trigger_message):
             logging.error(f'couldnt get slack history. response = {response}')
             raise Exception("Invalid response from Slack API")
     except SlackApiError as e:
-        logging.error(f"Error reading messages from Slack: {e.response['error']}")
-        send_message(trigger_message)
+        logging.error(f"Error from Slack API: {e.response['error']}")
+        retry_counter += 1
+        logging.info(f"New launch attempt. Attempt {retry_counter} out of 5.")
+        send_message()
 
-
-current_hour = int(time.strftime("%H"))
-if 0 <= current_hour < 15:
-    send_message("Reminder: В 9:00 отправить количество открытых чатов в тред")
-else:
-    send_message("Reminder: Ровно в 21:00 прислать в тред кол-во открытых чатов + дату изменения самого старого чата")
