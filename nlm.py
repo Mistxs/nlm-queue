@@ -70,3 +70,5 @@ def send_message():
         logging.info(f"New launch attempt. Attempt {retry_counter} out of 5.")
         send_message()
 
+
+send_message()
